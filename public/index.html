@@ -4,46 +4,109 @@
 <head>
     <meta charset="utf-8">
     
-    <!-- {{!-- Browser tab appearance --}} -->
+    <!-- {{!-- BROWSER --}} -->
     <title>Hangman</title>
+    <!-- maybe update icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/skull.ico" />
 
-    <!-- {{!-- Font libraries from google fonts --}} -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />    
-    <!-- {{!-- ICON API --}} -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- {{!--GOOGLE FONT API --}} -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap">    
+    
+    <!-- {{!-- ICON GOOGLE API --}} -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    
     <!-- CSS -->
-    <link rel="stylesheet" href="./index.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="index.css" media="screen">
 
+    <!-- SCRIPTS -->
+    <script src="index.js" charset="utf-8" defer></script>
 
 </head>
 
 <!-- Content of Page -->
 <body>
-    <header class="title">
+    <h1 class="title">
         Hangman Bob
-    </header>
-
-    <section class="word">
-
+    </h1>
+    
+    <section class="menu-container">
+        <button id="settings">
+            <span class="material-symbols-rounded">settings</span>
+        </button>
+        <button id="tutorial">
+            <span class="material-symbols-rounded">question_mark</span>
+        </button>
+        <button id="appearance">
+            <span class="material-symbols-rounded">checkroom</span>
+        </button>
+        <button id="gamemode">
+            <span class="material-symbols-rounded">sports_esports</span>
+        </button>
     </section>
 
-    <section class="menu-container">
-
+    <section class="word-container">
+        <div class="letter-guess hidden">a</div>
+        <div class="letter-guess hidden">g</div>
+        <div class="letter-guess hidden">i</div>
+        <div class="letter-guess hidden">l</div>
+        <div class="letter-guess hidden">e</div>
     </section>
 
     <section class="bob-container">
-
-    </section>
-
-    <section class="keys-container">
-
+        <div class="bob">
+            <div class="bob-part head"></div>
+            <div class="bob-part body"></div>
+            <div class="bob-part left-arm"></div>
+            <div class="bob-part right-arm"></div>
+            <div class="bob-part left-leg"></div>
+            <div class="bob-part right-leg"></div>
+        </div>
     </section>
 
     <section class="guess-bank">
-
     </section>
+
+    <section class="keyboard">
+        <div class="row-container">
+            <div class="top-row">
+                <button id="A">A</button>
+                <button id="B">B</button>
+                <button id="C">C</button>
+                <button id="D">D</button>
+                <button id="E">E</button>
+                <button id="F">F</button>
+                <button id="G">G</button>
+                <button id="H">H</button>
+                <button id="I">I</button>
+                <button id="J">J</button>
+            </div>            
+            <div class="home-row">
+                <button id="K">K</button>
+                <button id="L">L</button>
+                <button id="M">M</button>
+                <button id="N">N</button>
+                <button id="O">O</button>
+                <button id="P">P</button>
+                <button id="Q">Q</button>
+                <button id="R">R</button>
+                <button id="S">S</button>
+            </div>
+            <div class="bottom-row">
+                <button id="T">T</button>
+                <button id="U">U</button>
+                <button id="V">V</button>
+                <button id="W">W</button>
+                <button id="X">X</button>
+                <button id="Y">Y</button>
+                <button id="Z">Z</button>
+            </div>
+        </div>
+    </section>
+
+
 
 </body>
 

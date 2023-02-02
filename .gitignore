@@ -1,7 +1,6 @@
-# ignore weight
-node_modules
+# VS Code settings
 Hangman.code-workspace
+.vscode
 
-# Folders
-_CS361
-_CS 361
+# NPM 
+node_modules
