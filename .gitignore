@@ -1,6 +1,7 @@
 # VS Code settings
 Hangman.code-workspace
 .vscode
+Hangman_Bob.fw.png
 
-# NPM 
+# NPM
 node_modules

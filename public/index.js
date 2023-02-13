@@ -8,16 +8,30 @@
 /*********************************************************************
  ** Global Variables
  *********************************************************************/
-var geuss_bank = document.querySelector(".guess-bank")
-const keyboard = document.querySelector(".keyboard")
-const keys = document.querySelectorAll(".keyboard button")
-
-// WORD HANDLING
+var guess_bank = document.querySelector(".guess-bank")
+var keyboard = document.querySelector(".keyboard")
+//~ WORD HANDLING
 var word_container = document.querySelectorAll(".word-container .letter-guess")     // use .childNodes to access bits
-var correct_word = "agile"
 var INCORRECT_TRIES = 0
 var REVEALED_LETTERS = 0
+var correct_word = "agile"
 
+
+/*********************************************************************
+ ** Global Constants
+ *********************************************************************/
+const keys = document.querySelectorAll(".keyboard button")
+const ASCII_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+
+
+document.addEventListener("keydown", function(event) {
+    // ?Source: https://javascript.info/keyboard-events
+    console.log("Key: ", event.key)
+    console.log("type: ", typeof(event.key))
+    if (ASCII_LETTERS.includes(event.key)) {
+        handle_player_guess(event.key)
+    }
+})
 
 keyboard.addEventListener("click", function(event) {
     console.log("Clicked on keyboard: ", event.target)
@@ -36,7 +50,7 @@ function handle_player_guess(guessed_letter) {
     }
     // Else, add to guess bank
     else {
-        incorrect_guess(guessed_letter)
+        incorrect_guess(guessed_letter.toUpperCase())
     }
 }
 
@@ -47,18 +61,27 @@ function correct_guess(guessed_letter) {
         if (correct_word[index] == guessed_letter && curr_letter.textContent != guessed_letter) {
             curr_letter.textContent = guessed_letter
             REVEALED_LETTERS++
-
-            if (REVEALED_LETTERS === correct_word.length) {
-                alert("You won! Hit OK to play again")
-                reset_game()
-            }
         }
     })
+
+    if (REVEALED_LETTERS === correct_word.length) {
+        //! Alert triggered before image could change, fix with timeout
+        // https://stackoverflow.com/questions/41936043/javascript-alert-supersedes-preceding-code
+        setTimeout(function () {
+            alert("You won! Hit OK to play again")
+            reset_game()
+        }, 200)
+    }
 }
 
-
+ /*********************************************************************
+  * Handle incorrect guess and update bob's appearance, detect if game ends
+  *
+  * @param {string} guessed_letter - letter that was guessed (uppercase)
+  * @returns None
+  */
 function incorrect_guess(guessed_letter) {
-    // Only add letter if not already guessed
+    // Only add letter if it was not already guessed
     var guesses_text = document.querySelector(".guess-bank").textContent
     //
     if (!guesses_text.includes(guessed_letter)) {
@@ -66,22 +89,32 @@ function incorrect_guess(guessed_letter) {
         unused_letter.classList.add("unused-letter")
         unused_letter.textContent = guessed_letter.toUpperCase()
 
-        geuss_bank.appendChild(unused_letter)
+        guess_bank.appendChild(unused_letter)
 
         // Update hangman image
         INCORRECT_TRIES++
         var hangman_img = document.getElementById("bob-id")
         hangman_img.src = "/OUT/BobV" + INCORRECT_TRIES + ".png"
-        // console.log("IMG: ", hangman_img)
+    }
 
-        if (INCORRECT_TRIES === 6) {
+    // Check if game is over
+    if (INCORRECT_TRIES === 6) {
+        //! Alert triggered before image could change, fix with timeout
+        // https://stackoverflow.com/questions/41936043/javascript-alert-supersedes-preceding-code
+        setTimeout(function () {
             alert("Gameover! Hit OK to play again")
             reset_game()
-        }
+        }, 200)
     }
 }
 
-
+ /*********************************************************************
+ ** Function:
+ ** Description:
+ **
+ ** Parameters:
+ **     None
+ *********************************************************************/
 function reset_game() {
     INCORRECT_TRIES = 0
     REVEALED_LETTERS = 0

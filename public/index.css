@@ -36,6 +36,8 @@ a {
     font-size: 10vh;
     text-align: center;
     margin: 1vh;
+
+    margin-bottom: 25vh;       /* FIX LATER FOR SPACING*/
 }
 
 
@@ -57,17 +59,20 @@ a {
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
+    /* justify-content: flex-end; */
+    /* align-items: flex-end; */
 }
 
 .menu-container button {
     margin: 0.2em;
-    width: 2em;
-    height: 2em;
+    width: 2.1em;
+    height: 2.1em;
 
-    background-color: lightgray;
+    /* background-color: lightgray;
     border: 1px solid black;
+    border-radius: 10%; */
+    background-color: #e8e8e8;
+    border: 0.2rem outset #ddd;
     border-radius: 10%;
 
     font-size: 20px;
@@ -172,9 +177,10 @@ a {
 
 .guess-bank {
     position: absolute;
-    bottom: 0;
+    bottom: 5vh;
     margin: 1vw;
-    width: 90%;
+
+    width: 80%;
     height: 30%;
 
     /* For letters inside */
@@ -183,12 +189,12 @@ a {
     flex-wrap: wrap;
     /* gap: 0; */
 
-    border: 1px solid black;
+    border: 10px solid #000;
 }
 
 .unused-letter {
     margin-top: 0.5em;
-    margin-left: 2em;
+    margin-left: 1.5em;
 
     font-size: 150%;
     /* background-color: pink; */
@@ -205,11 +211,11 @@ a {
 
 .keyboard button {
     margin: 0.2em;
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.8em;
+    height: 1.8em;
 
-    background-color: #eff1f3;
-    border: 0.1rem outset #ddd;
+    background-color: #e8e8e8;
+    border: 0.2rem outset #ddd;
     border-radius: 10%;
 
     font-size: 150%;
@@ -220,7 +226,7 @@ a {
 }
 
 .keyboard button:hover {
-    background-color: lightgray;
+    background-color: rgb(174, 171, 171);
 }
 
 .keyboard {

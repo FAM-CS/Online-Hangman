@@ -14,3 +14,14 @@ Selectors/combinators giving me trouble...
 + https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors
 
 Relative position leaves element in place then moves it, absolute moves it without affecting other stuff
+
+## 2023.2.12
+Scope/feature creep is real, stick to sprint goals.
+> Make it work > make it right > make it fast
+
+## 2023.2.13
+Diving into documentation styles, may make migration to TS easier:
++ https://www.codexpedia.com/javascript/javascript-function-and-class-header-documentation/
++ https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/
+
+Two ** creates a bullet
