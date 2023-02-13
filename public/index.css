@@ -135,15 +135,16 @@ a {
 
     width: 30vw;
     height: 70%;
-    background-color: pink;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    background-color: pink;
 }
 
 .bob-container {
-
     /* justify-content: center; */
     /* align-content: center; */
     /* align-items: center; */
@@ -153,83 +154,10 @@ a {
     /* top: 0; */
     /* left: 0; */
 
-
-    /* width: 30%;
-    height: 70%; */
+    /* width: 30%; */
+    /* height: 70%; */
 
     background-color: rgb(126, 255, 255);
-    /* width: 100%; */ /* let width be auto*/
-}
-
-
-.bob {
-    width: 30vh;
-    height: 50vh;
-    margin: 50px auto;
-    /* position: relative; */
-}
-
-.bob-part {
-    /* position: absolute; */
-}
-
-.bob-part.head {
-    width: 30%;
-    height: 20%;
-    /* top: 5px; */
-    /* left: 125px; */
-
-    border-radius: 50%;
-    background-color: #000;
-}
-
-.bob-part.body {
-    width: 10px;
-    height: 100px;
-    /* top: 70px; */
-    /* left: 145px; */
-
-    background-color: #000;
-}
-
-.bob-part.left-arm {
-    width: 50px;
-    height: 10px;
-    /* top: 100px; */
-    /* left: 90px; */
-
-    transform: rotate(-45deg);
-    background-color: #000;
-}
-
-.bob-part.right-arm {
-    width: 50px;
-    height: 10px;
-    top: 100px;
-    left: 160px;
-
-    transform: rotate(45deg);
-    background-color: #000;
-}
-
-.bob-part.left-leg {
-    width: 10px;
-    height: 50px;
-    top: 170px;
-    left: 115px;
-
-    transform: rotate(45deg);
-    background-color: #000;
-}
-
-.bob-part.right-leg {
-    width: 10px;
-    height: 50px;
-    top: 170px;
-    left: 175px;
-
-    transform: rotate(-45deg);
-    background-color: #000;
 }
 
 
@@ -257,13 +185,18 @@ a {
     margin-top: 0.5em;
     margin-left: 1em;
 
-    font-size: larger;
+    font-size: 150%;
     /* background-color: pink; */
 }
 
 /* ------------------------------------------------------------------------------------ */
 /* KEYBOARD --------------------------------------------------------------------------- */
 /* ------------------------------------------------------------------------------------ */
+
+/* .keyboard {
+    position: absolute;
+    bottom: 0;
+} */
 
 .keyboard button {
     margin: 0.2em;
@@ -274,7 +207,7 @@ a {
     border: 0.1rem outset #ddd;
     border-radius: 10%;
 
-    font-size: 20px;
+    font-size: 150%;
     line-height: 20px;
     text-align: center;
 

@@ -29,9 +29,10 @@ keyboard.addEventListener("click", function(event) {
 
 
 function handle_player_guess(guessed_letter) {
-    guessed_letter = guessed_letter.toLowerCase()
+    // Check if letter is in correct word
+    if (correct_word.includes(guessed_letter.toLowerCase())) {
+        guessed_letter = guessed_letter.toLowerCase()
 
-    if (correct_word.includes(guessed_letter)) {
         word_container.forEach((curr_letter, index) => {
             // console.log("LOOP: , i: ", curr_letter, index);
             if (correct_word[index] == guessed_letter && curr_letter.textContent != guessed_letter) {
@@ -39,13 +40,19 @@ function handle_player_guess(guessed_letter) {
             }
         })
     }
+    // Else, add to guess bank
     else {
-        // Else, add to guess back
-        var unused_letter = document.createElement("div")
-        unused_letter.classList.add("unused-letter")
-        unused_letter.textContent = guessed_letter.toUpperCase()
+        var guesses = document.querySelector(".guess-bank")
+        var guesses_text = guesses.textContent
 
-        geuss_bank.appendChild(unused_letter)
+        // Only add letter if not already guessed
+        if (!guesses_text.includes(guessed_letter)) {
+            var unused_letter = document.createElement("div")
+            unused_letter.classList.add("unused-letter")
+            unused_letter.textContent = guessed_letter.toUpperCase()
+
+            geuss_bank.appendChild(unused_letter)
+        }
     }
 }
 
