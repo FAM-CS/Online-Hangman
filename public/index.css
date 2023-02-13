@@ -116,7 +116,8 @@ a {
 
     width: 30vw;
     height: 100vh;
-    background-color: rgb(235, 187, 124);
+
+    /* background-color: rgb(235, 187, 124); */
 }
 
 .right-section {
@@ -141,7 +142,11 @@ a {
     justify-content: center;
     align-items: center;
 
-    background-color: pink;
+    /* background-color: pink; */
+}
+
+.post {
+    position: absolute;
 }
 
 .bob-container {
@@ -157,7 +162,7 @@ a {
     /* width: 30%; */
     /* height: 70%; */
 
-    background-color: rgb(126, 255, 255);
+    /* background-color: rgb(126, 255, 255); */
 }
 
 
@@ -183,7 +188,7 @@ a {
 
 .unused-letter {
     margin-top: 0.5em;
-    margin-left: 1em;
+    margin-left: 2em;
 
     font-size: 150%;
     /* background-color: pink; */
