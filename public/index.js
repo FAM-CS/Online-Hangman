@@ -1,6 +1,6 @@
 /*******************************************************************************
  * Program Filename: index.js
- * Description: 
+ * Description:
  *     File for client side html and logic
  *******************************************************************************/
 
@@ -13,7 +13,7 @@ const keyboard = document.querySelector(".keyboard")
 const keys = document.querySelectorAll(".keyboard button")
 
 // use .childNodes to access bits
-var word_container = document.querySelectorAll(".word-container .letter-guess")  
+var word_container = document.querySelectorAll(".word-container .letter-guess")
 
 var correct_word = "agile"
 
@@ -27,42 +27,34 @@ keyboard.addEventListener("click", function(event) {
     }
 })
 
- 
-function handle_player_guess(letter) {
-    letter = letter.toLowerCase()
-    if (correct_word.includes(letter)) {
-        for (var l in word_container) {
-            console.log("LOOP:", word_container[l]);
-            if (word_container[l].textContent== letter) {
-                word_container[l].toggleAttribute("hidden")
+
+function handle_player_guess(guessed_letter) {
+    guessed_letter = guessed_letter.toLowerCase()
+
+    if (correct_word.includes(guessed_letter)) {
+        word_container.forEach((curr_letter, index) => {
+            // console.log("LOOP: , i: ", curr_letter, index);
+            if (correct_word[index] == guessed_letter && curr_letter.textContent != guessed_letter) {
+                curr_letter.textContent = guessed_letter
             }
-        }
+        })
     }
-    // if (correct_word.includes(letter)) {
-    // Check if letter is correct
-    //     word_container.forEach(function(corr_letter){
-    //             console.log("Letter go: ", corr_letter.textContent)
-    //             if (corr_letter.textContent == letter) {
-    //                 corr_letter = corr_letter.toggle("hidden")
-    //             }
-    //         })
-    // }
     else {
         // Else, add to guess back
         var unused_letter = document.createElement("div")
         unused_letter.classList.add("unused-letter")
-        unused_letter.textContent = letter.toUpperCase()
-    
+        unused_letter.textContent = guessed_letter.toUpperCase()
+
         geuss_bank.appendChild(unused_letter)
     }
 }
- 
+
 
 
  /*********************************************************************
- ** Function: 
- ** Description: 
- **     
+ ** Function:
+ ** Description:
+ **
  ** Parameters:
  **     None
  *********************************************************************/
