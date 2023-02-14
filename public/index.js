@@ -1,9 +1,4 @@
-/*******************************************************************************
- * Program Filename: index.js
- * Description:
- *     File for client side html and logic
- *******************************************************************************/
-
+#!/usr/bin/env js
 
 /*********************************************************************
  ** Global Variables
@@ -24,6 +19,7 @@ const keys = document.querySelectorAll(".keyboard button")
 const ASCII_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
 
+// LISTEN for key presses if in alphabet
 document.addEventListener("keydown", function(event) {
     // ?Source: https://javascript.info/keyboard-events
     console.log("Key: ", event.key)
@@ -33,6 +29,7 @@ document.addEventListener("keydown", function(event) {
     }
 })
 
+// LISTEN for key button clicks
 keyboard.addEventListener("click", function(event) {
     console.log("Clicked on keyboard: ", event.target)
 
@@ -43,6 +40,12 @@ keyboard.addEventListener("click", function(event) {
 })
 
 
+ /*********************************************************************
+  * Determine if guess was correct and call appropriate action
+  *
+  * @param {string} guessed_letter - letter that was guessed (uppercase)
+  * @returns None
+  */
 function handle_player_guess(guessed_letter) {
     // Check if letter is in correct word
     if (correct_word.includes(guessed_letter.toLowerCase())) {
@@ -55,6 +58,12 @@ function handle_player_guess(guessed_letter) {
 }
 
 
+ /*********************************************************************
+  * Handle correct guess and update word appearance, detect if game ends (win)
+  *
+  * @param {string} guessed_letter - letter that was guessed (lowercase)
+  * @returns None
+  */
 function correct_guess(guessed_letter) {
     word_container.forEach((curr_letter, index) => {
         // console.log("LOOP: , i: ", curr_letter, index);
@@ -73,6 +82,7 @@ function correct_guess(guessed_letter) {
         }, 200)
     }
 }
+
 
  /*********************************************************************
   * Handle incorrect guess and update bob's appearance, detect if game ends
@@ -109,12 +119,11 @@ function incorrect_guess(guessed_letter) {
 }
 
  /*********************************************************************
- ** Function:
- ** Description:
- **
- ** Parameters:
- **     None
- *********************************************************************/
+  * Reset game
+  *
+  * @param None
+  * @returns None
+  */
 function reset_game() {
     INCORRECT_TRIES = 0
     REVEALED_LETTERS = 0
@@ -129,11 +138,3 @@ function reset_game() {
     var hangman_img = document.getElementById("bob-id")
     hangman_img.src = "/OUT/BobV0.png"
 }
-
- /*********************************************************************
- ** Function:
- ** Description:
- **
- ** Parameters:
- **     None
- *********************************************************************/
