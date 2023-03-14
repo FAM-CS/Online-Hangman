@@ -28,88 +28,155 @@
 
 <!-- Content of Page -->
 <body>
-    <div class="center-section">
-        <h1 class="title">
-            Hangman Bob
-        </h1>
+    <main>
+        <div class="center-section">
+            <h1 class="title">
+                Hangman Bob
+            </h1>
 
-        <section class="word-container">
-            <div class="letter-guess"></div>
-            <div class="letter-guess"></div>
-            <div class="letter-guess"></div>
-            <div class="letter-guess"></div>
-            <div class="letter-guess"></div>
-        </section>
+            <section class="word-container">
+            </section>
 
-        <section class="keyboard">
-            <div class="row-container">
-                <div class="top-row">
-                    <button id="A">A</button>
-                    <button id="B">B</button>
-                    <button id="C">C</button>
-                    <button id="D">D</button>
-                    <button id="E">E</button>
-                    <button id="F">F</button>
-                    <button id="G">G</button>
-                    <button id="H">H</button>
-                    <button id="I">I</button>
-                    <button id="J">J</button>
+            <section class="keyboard">
+                <div class="row-container">
+                    <div class="top-row">
+                        <button id="A">A</button>
+                        <button id="B">B</button>
+                        <button id="C">C</button>
+                        <button id="D">D</button>
+                        <button id="E">E</button>
+                        <button id="F">F</button>
+                        <button id="G">G</button>
+                        <button id="H">H</button>
+                        <button id="I">I</button>
+                        <button id="J">J</button>
+                    </div>
+                    <div class="home-row">
+                        <button id="K">K</button>
+                        <button id="L">L</button>
+                        <button id="M">M</button>
+                        <button id="N">N</button>
+                        <button id="O">O</button>
+                        <button id="P">P</button>
+                        <button id="Q">Q</button>
+                        <button id="R">R</button>
+                        <button id="S">S</button>
+                    </div>
+                    <div class="bottom-row">
+                        <button id="T">T</button>
+                        <button id="U">U</button>
+                        <button id="V">V</button>
+                        <button id="W">W</button>
+                        <button id="X">X</button>
+                        <button id="Y">Y</button>
+                        <button id="Z">Z</button>
+                    </div>
                 </div>
-                <div class="home-row">
-                    <button id="K">K</button>
-                    <button id="L">L</button>
-                    <button id="M">M</button>
-                    <button id="N">N</button>
-                    <button id="O">O</button>
-                    <button id="P">P</button>
-                    <button id="Q">Q</button>
-                    <button id="R">R</button>
-                    <button id="S">S</button>
-                </div>
-                <div class="bottom-row">
-                    <button id="T">T</button>
-                    <button id="U">U</button>
-                    <button id="V">V</button>
-                    <button id="W">W</button>
-                    <button id="X">X</button>
-                    <button id="Y">Y</button>
-                    <button id="Z">Z</button>
-                </div>
-            </div>
-        </section>
-    </div>
-
-
-    <div class="right-side">
-        <section class="menu-container">
-            <button id="settings">
-                <span class="material-symbols-rounded">settings</span>
-            </button>
-            <button id="tutorial">
-                <span class="material-symbols-rounded">question_mark</span>
-            </button>
-            <button id="appearance">
-                <span class="material-symbols-rounded">checkroom</span>
-            </button>
-            <button id="gamemode">
-                <span class="material-symbols-rounded">sports_esports</span>
-            </button>
-        </section>
-    </div>
-
-
-    <section class="left-section">
-        <div class="bob-outer-container">
-            <section class="bob-container">
-                <img src="/OUT/Post.png" alt="hangman post" class="post">
-                <img src="/OUT/BobV0.png" alt="hangman" id="bob-id">
             </section>
         </div>
 
-        <section class="guess-bank">
-        </section>
-    </section>
 
+        <div class="right-side">
+            <section class="menu-bar">
+                <!-- NOTE: I was having issue with recognizing clicks, did not use IDs -->
+                <button>
+                    <span class="settings material-symbols-rounded">settings</span>
+                </button>
+                <button>
+                    <span class="tutorial material-symbols-rounded">question_mark</span>
+                </button>
+                <button>
+                    <span class="appearance material-symbols-rounded">checkroom</span>
+                </button>
+                <button>
+                    <span class="gamemode material-symbols-rounded">sports_esports</span>
+                </button>
+            </section>
+        </div>
+
+
+        <section class="left-section">
+            <div class="bob-outer-container">
+                <section class="bob-container">
+                    <img src="/public/figure/Post.png" alt="hangman post" class="post">
+                    <img src="/public/figure/BobV0.png" alt="hangman" id="bob-id">
+                </section>
+            </div>
+
+            <section class="guess-bank">
+            </section>
+        </section>
+
+    </main>
+
+    <!-- Modal block any accidental clicks -->
+    <div id="modal-backdrop" class="hidden"></div>
+
+    <div id="wip-modal" class="hidden">
+        <div class="modal-container">
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <h3>Sorry! Feature under construction.</h3>
+                    <button class="modal-close-button">
+                        <span class="material-symbols-rounded small-icons">close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tutorial-modal" class="hidden">
+        <div class="modal-container">
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <h3>How to Play Hangman</h3>
+                    <button class="modal-close-button">
+                        <span class="material-symbols-rounded small-icons">close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Welcome to Hangman Bob! This is a game where your goal is to guess
+                        the letters for a given blank word on the main screen before Bob is hung.
+                        The number of short dashed lines is the length of the correct word.
+                        You can guess by either clicking on the letter buttons or using the keyboard keys.
+                    </p>
+                    <p>
+                        If you guess the incorrect letter it will show up in the left box and
+                        Bob will slowly appear. Repeated incorrect or correct letters will not be counted.
+                        You have 6 tries to save Bob.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gameover-modal" class="hidden">
+        <div class="modal-container">
+            <div class="modal-dialog">
+                <div class="modal-header">
+                    <h3>Game Over!</h3>
+                    <button class="modal-close-button">
+                        <span class="material-symbols-rounded small-icons">close</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p id="declare-gameover">
+                        You lost!
+                    </p>
+                    <p>
+                        </br>
+                        Play again with:
+                    </p>
+                </div>
+                <div class="modal-buttons">
+                    <button id="same-word" class="modal-options">Same Word</button>
+                    <button id="different-word" class="modal-options">Different Word</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 

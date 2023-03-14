@@ -1,0 +1,5 @@
+{
+    "easy":["cat","dog","hat","bat","bot","kit","pet"],
+    "medium": ["agile","python", "house", "party","words"],
+    "hard":["elephant", "directory","giraffe","chocolate", "education","bovine"]
+}

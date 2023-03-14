@@ -1,0 +1,18 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "An online hangman game with Bob. Bob does not mind. A student portfolio project for CS361 (Software Engineerign I) at OSU.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js && node wordService.js",
+    "dev": "nodemon server.js && node wordService.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FAM-CS/Online-Hangman"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
