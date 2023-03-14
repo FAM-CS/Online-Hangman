@@ -2,10 +2,11 @@
 An online hangman game with Bob. Bob does not mind.
 
 A student portfolio project for CS361 (Software Engineering I) at OSU.
+A work in progress.
 
 ## How to Run
-Currently this is set up for local hosting through an Express JS server.
-Server needs to run 2 servers.
+Currently this is set up for local hosting and everything is statically served
+except for new words to guess via a wordService (HTTP) method.
 
 Run in command line:
 ```

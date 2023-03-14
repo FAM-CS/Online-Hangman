@@ -30,19 +30,26 @@ const ASCII_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 const MAX_TRIES = 6
 
 
-// LISTEN for key presses if in alphabet
+/*********************************************************************
+ * Listen handler for keyboard pushes,
+ * only register keystrokes if within letters of alphabet
+ */
 document.addEventListener("keydown", function(event) {
     // ?Source: https://javascript.info/keyboard-events
-    console.log("Key: ", event.key)
-    console.log("type: ", typeof(event.key))
+    console.log("Key:", event.key)
+    //
     if (ASCII_LETTERS.includes(event.key)) {
         handle_player_guess(event.key)
     }
 })
 
-// LISTEN for key button clicks
+
+/*********************************************************************
+ * Listen handler for keyboard pushes,
+ * only register button clicks if on keyboard
+ */
 keyboard.addEventListener("click", function(event) {
-    console.log("Clicked on keyboard: ", event.target)
+    console.log("Clicked on keyboard:", event.target)
 
     if (event.target.nodeName == "BUTTON") {
         const letter = event.target.textContent
@@ -50,6 +57,10 @@ keyboard.addEventListener("click", function(event) {
     }
 })
 
+
+/*********************************************************************
+ * Listen handler for Work In Progress Modal close button
+ */
 wip_modal.addEventListener("click", function(event) {
     console.log("Clicked on WIP: ", event.target)
 
@@ -60,28 +71,41 @@ wip_modal.addEventListener("click", function(event) {
 })
 
 
+/*********************************************************************
+ * Listen handler for Tutorial Modal close button
+ */
 tutorial_modal.addEventListener("click", function(event) {
-    console.log("Clicked on WIP: ", event.target)
+    // console.log("Clicked on WIP: ", event.target)
 
+    // Exit modal if user clicked on X close button
     if (event.target.nodeName == "SPAN") {
-        // Exit modal
         toggle_modal("tutorial-modal")
     }
 })
 
-gameover_modal.addEventListener("click", function(event) {
-    console.log("Clicked on WIP: ", event.target)
 
+/*********************************************************************
+ * Listen handler for Gameover Modal
+ * Handles resetting game based on option user clicks
+ */
+gameover_modal.addEventListener("click", function(event) {
+    // console.log("Clicked on WIP: ", event.target)
+    var same_word = true
+
+    //~ Check what user clicked on
     if (event.target.nodeName == "SPAN") {
-        // Exit modal
-        reset_game(true)
+        // User clicked on X close button
+        reset_game(same_word)
         toggle_modal("gameover-modal")
     } else if (event.target.id == "different-word") {
-        reset_game(false)
+        // User picked different word
+        same_word = false
+        reset_game(same_word)
         toggle_modal("gameover-modal")
     }
     else if (event.target.id == "same-word") {
-        reset_game(true)
+        // User picked same word
+        reset_game(same_word)
         toggle_modal("gameover-modal")
     }
 })
@@ -97,13 +121,16 @@ menu_bar.addEventListener("click", function(event) {
     console.log("Clicked on menu:", event.target)
     console.log("list:", event.target.classList)
 
+    //~ If modal/menu is not implemented yet, display WIP modal
     //? https://www.w3schools.com/jsref/met_domtokenlist_contains.asp
     if (event.target.classList.contains("gamemode") ||
         event.target.classList.contains("appearance") ||
-        event.target.classList.contains("settings")) {
+        event.target.classList.contains("settings")
+        ) {
         toggle_modal("wip-modal")
     }
     else if (event.target.classList.contains("tutorial")) {
+        // Show tutorial
         toggle_modal("tutorial-modal")
     }
 })
@@ -156,14 +183,13 @@ function init_word_container(word) {
 /*********************************************************************
  * Remove all letter guess inputs
  *
- * @param None
- * @returns None
+ * @param None.
+ * @returns None.
  */
-function clear_word_container() {
+function clear_word_containers() {
     for (let i = 0; i < word_container_list.length; i++) {
         word_container_list[i].remove();
     }
-
     guess_bank.innerHTML = ""
 }
 
@@ -175,12 +201,12 @@ function clear_word_container() {
   * @returns None
   */
 function handle_player_guess(guessed_letter) {
-    // Check if letter is in correct word
     if (correct_word.includes(guessed_letter.toLowerCase())) {
+        // Letter is in correct word
         correct_guess(guessed_letter.toLowerCase())
     }
-    // Else, add to guess bank
     else {
+        // Letter is not correct, add to guess bank
         incorrect_guess(guessed_letter.toUpperCase())
     }
 }
@@ -194,20 +220,15 @@ function handle_player_guess(guessed_letter) {
   */
 function correct_guess(guessed_letter) {
     word_container_list.forEach((curr_letter, index) => {
-        // console.log("LOOP: , i: ", curr_letter, index);
         if (correct_word[index] == guessed_letter && curr_letter.textContent != guessed_letter) {
             curr_letter.textContent = guessed_letter
             REVEALED_LETTERS++
         }
     })
 
-    if (REVEALED_LETTERS === correct_word.length) {
-        //! Alert triggered before image could change, fix with timeout
-        // https://stackoverflow.com/questions/41936043/javascript-alert-supersedes-preceding-code
-        setTimeout(function () {
-            display_gameover(true)
-        }, 200)
-    }
+    //~ Check if gameover
+    detect_gameover()
+
 }
 
 
@@ -218,28 +239,59 @@ function correct_guess(guessed_letter) {
   * @returns None
   */
 function incorrect_guess(guessed_letter) {
-    // Only add letter if it was not already guessed
+    //~ Only add letter if it was not already guessed
     var guesses_text = document.querySelector(".guess-bank").textContent
     //
     if (!guesses_text.includes(guessed_letter)) {
+        //~ Add incorrect guess to guess bank
         var unused_letter = document.createElement("div")
         unused_letter.classList.add("unused-letter")
         unused_letter.textContent = guessed_letter.toUpperCase()
-
+        //
         guess_bank.appendChild(unused_letter)
 
-        // Update hangman image
-        INCORRECT_TRIES++
-        var hangman_img = document.getElementById("bob-id")
-        hangman_img.src = "/public/figure/BobV" + INCORRECT_TRIES + ".png"
+        //~ Update hangman image and attempts count
+        update_tries()
     }
 
-    // Check if game is over
+    //~ Check if game is over
+    detect_gameover()
+}
+
+
+ /*********************************************************************
+  * Update incorrect tries and make Bob image match
+  *
+  * @param None.
+  * @returns None.
+  */
+function update_tries() {
+    INCORRECT_TRIES++
+    var hangman_img = document.getElementById("bob-id")
+    hangman_img.src = "/public/figure/BobV" + INCORRECT_TRIES + ".png"
+}
+
+ /*********************************************************************
+  * Check if game ended, if so prompt correct game over menu (win/lose)
+  *
+  * @param None.
+  * @returns None.
+  */
+function detect_gameover() {
+    //? Modal triggered before image could change, fix with timeout
+    // https://stackoverflow.com/questions/41936043/javascript-alert-supersedes-preceding-code
+    //
+    //~ Check if user lost or won
     if (INCORRECT_TRIES === MAX_TRIES) {
-        //! Alert triggered before image could change, fix with timeout
-        // https://stackoverflow.com/questions/41936043/javascript-alert-supersedes-preceding-code
+        // User lost
         setTimeout(function () {
             display_gameover(false)
+        }, 200)
+    }
+    else if (REVEALED_LETTERS === correct_word.length){
+        // User won
+        setTimeout(function () {
+            display_gameover(true)
         }, 200)
     }
 }
@@ -279,7 +331,7 @@ function reset_game(is_same_word = false) {
     }
     else {
         console.log("SAMEWORD, CLEAR")
-        clear_word_container()
+        clear_word_containers()
         init_word_container(correct_word)
         var hangman_img = document.getElementById("bob-id")
         hangman_img.src = "/public/figure/BobV0.png"
@@ -294,28 +346,15 @@ function reset_game(is_same_word = false) {
   * @returns None.
   */
 function get_new_word() {
-    var guesses = document.querySelector(".guess-bank")
-    guesses.textContent = ""
-
     //~ Determine difficulty of new word
-    var difficulty = get_random_int(3)
-    var link_get = ""
-    if (difficulty == 0) {
-        link_get = "http://localhost:50521/easy"
-    }
-    else if (difficulty == 2) {
-        link_get = "http://localhost:50521/medium"
-    }
-    else {
-        link_get = "http://localhost:50521/hard"
-    }
+    var link_get = choose_difficulty()
 
     //~ Request new word
     const xhr = new XMLHttpRequest();
     xhr.open('GET', link_get);
     xhr.onload = function() {
         if (xhr.status === 200) {
-            clear_word_container()
+            clear_word_containers()
             init_word_container(xhr.responseText)
             correct_word = xhr.responseText
             console.log(correct_word)
@@ -327,4 +366,28 @@ function get_new_word() {
         }
     }
     xhr.send()
+}
+
+
+ /*********************************************************************
+  * Pick difficulty of word to request from service
+  *
+  * @param None.
+  * @returns {string} Request link to return.
+  */
+function choose_difficulty() {
+    var difficulty_level = get_random_int(3)
+    var link = ""
+
+    if (difficulty_level == 0) {
+        link = "http://localhost:50521/easy"
+    }
+    else if (difficulty_level == 2) {
+        link = "http://localhost:50521/medium"
+    }
+    else {
+        link = "http://localhost:50521/hard"
+    }
+
+    return link
 }

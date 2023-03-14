@@ -25,3 +25,8 @@ Diving into documentation styles, may make migration to TS easier:
 + https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/
 
 Two ** creates a bullet
+
+## 2023.3.13
+Going back to handlebars and documentation at some point
++ https://handlebarsjs.com/
++ https://developer.mozilla.org/en-US/docs/Web/CSS/text-shadow
